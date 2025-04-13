@@ -37,7 +37,7 @@ function App() {
       console.error("Error during login:", error);
       if (error.name === "InvalidParameterException") {
         // Invalid username or password
-        setError("Incorrect username or password. Please try again.");
+        alert("Incorrect username or password. Please try again.");
         } else {
         // Handle other errors
         setError("An error occurred. Please try again later.");
