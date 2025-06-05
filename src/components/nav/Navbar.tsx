@@ -7,11 +7,12 @@ const Navbar: React.FC = () => {
     const {isAuthenticated} = useAuth0();
   return (
     <nav className="navBar">
+      <NavLink className="navItem" to="/">Home</NavLink>
      {isAuthenticated && (
          <>
-             <NavLink className="navItem" to="/">Home</NavLink>
-             <NavLink className="navItem" to="/about">About</NavLink>
-             <NavLink className="navItem" to="/user">Profile</NavLink>
+          <NavLink className="navItem" to="/dashboard">Dashboard</NavLink>
+          <NavLink className="navItem" to="/about">About</NavLink>
+          <NavLink className="navItem" to="/user">Profile</NavLink>
          </>
      )}
     <Dropdown/>
