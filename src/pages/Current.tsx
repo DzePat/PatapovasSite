@@ -4,7 +4,7 @@ import { Project } from '../models/project';
 function CurrentProject() {
 
   const [projectData, setData] = useState<Project | null>(null);
-  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
   const ProjectName = "TestProjectTitle";
 
   useEffect(() => {
@@ -12,8 +12,6 @@ function CurrentProject() {
       const res = await fetch(audience + `api/projects?name=${encodeURIComponent(ProjectName)}`);
       const resjson = await res.json();
       setData(resjson);
-      console.log(projectData);
-      console.log(resjson);
     };
     fetchData();
   }, [ProjectName]);

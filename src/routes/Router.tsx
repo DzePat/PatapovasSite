@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route , Navigate} from 'react-router-dom';
 import React from 'react';
 import MainPage from '../pages/MainPage';
 import Dashboard from "../pages/Dashboard"
@@ -11,9 +11,8 @@ const Router: React.FC = () => {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/current" element={<CurrentProject />} />
-      {isAuthenticated && (
-        <Route path="/dashboard" element={<Dashboard />} />
-      )}
+      <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" replace />
+} />
     </Routes>
   );
 }

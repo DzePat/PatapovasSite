@@ -4,7 +4,7 @@ import { useEffect,useState} from "react";
 function Dashboard() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [message, setMessage] = useState<string>();
-  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
 
   useEffect(() => {
   const fetchData = async () => {
