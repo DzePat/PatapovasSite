@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 import MainPage from '../pages/MainPage';
-import Dashboard from '../pages/dashboard/dashboard';
+import Dashboard from "../pages/Dashboard"
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Router: React.FC = () => {

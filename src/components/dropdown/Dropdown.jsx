@@ -20,7 +20,13 @@ const Dropdown = () => {
                 </ul>
                 ) : (
                 <ul>
-                    <DropdownItem img = {logoutIcon} text = "Login" onClick={() => loginWithRedirect()}/>
+                    <DropdownItem img = {logoutIcon} text = "Login" onClick={() => loginWithRedirect({
+                        authorizationParams: {
+                        audience: "http://localhost:3000/", 
+                        scope: "read:data write:data",           
+                        prompt: "consent",
+                    },
+                    })}/>
                 </ul>
                 )}
             </div>
