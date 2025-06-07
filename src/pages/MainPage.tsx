@@ -1,6 +1,6 @@
 import Particle from "../utils/Particle"
-import { Button } from "@mui/material";
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const MyButton = styled.button`
   background-color: teal;
@@ -28,11 +28,12 @@ const Container = styled.div`
 
 
 function MainPage() {
+  const navigate = useNavigate();
  return (      
    <>
    <Container>
       <Particle/>
-      <MyButton>Current project</MyButton>
+      <MyButton onClick={() => navigate("/current")}>Current project</MyButton>
     </Container>
    </>
   );

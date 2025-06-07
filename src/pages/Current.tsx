@@ -1,25 +1,30 @@
 import { useEffect,useState} from "react";
-import { data } from "react-router-dom";
+import { Project } from '../models/project';
 
 function CurrentProject() {
 
-  const [message, setMessage] = useState<string>();
+  const [projectData, setData] = useState<Project | null>(null);
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+  const ProjectName = "TestProjectTitle";
 
   useEffect(() => {
-  const fetchData = async () => {
-        const res = await fetch(audience + "?name=${encodeURIComponent(projectName)}");
-        const testprojectname = "TestProjectTitle";
-        const data = await res.json();
-        setMessage(data.message);
+    const fetchData = async () => {
+      const res = await fetch(audience + `api/projects?name=${encodeURIComponent(ProjectName)}`);
+      const resjson = await res.json();
+      setData(resjson);
+      console.log(projectData);
+      console.log(resjson);
     };
     fetchData();
-  }, [data]);
+  }, [ProjectName]);
   
-  console.log("message", message)
  return (      
     <div className="mainpage">
        <p> This is current Project</p>
+       <p>Title: {projectData?.title}</p>
+       <p>Description: {projectData?.description}</p>
+       <p>Summary: {projectData?.summary}</p>
+        <p>img_URL {projectData?.img_url}</p>
     </div>
   );
 }
