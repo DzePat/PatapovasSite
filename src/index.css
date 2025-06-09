@@ -1,5 +1,6 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: transparent;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -9,6 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  justify-content: center;
 }
 
 body {
@@ -19,91 +21,3 @@ body {
   min-height: 100vh;
 }
 
-button {
- color: black;
-}
-.login-field-container {
-  margin-top: 50px;
-}
-
-.login-container {
-  border-radius: 15px;
-  border: 2px solid white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #8BC6EC;
-  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%); 
-  margin-left: 1050px;
-  width: 300px;
-  height: 400px;
-}
-
-
-
-.login-field {
-  background-color: white;
-  border-radius: 5px;
-  text-align: center;
-  color: black;
-  font: 200;
-  margin: 10px;
-  width: 200px;
-  height: 30px;
-}
-
-.custom-button {background-image: linear-gradient(to right, #283048 0%, #859398  51%, #283048  100%)}
-.custom-button {
-    margin-bottom: 15px;
-    width: 180px;
-     padding: 15px 45px;
-     text-align: center;
-     text-transform: uppercase;
-     transition: 0.5s;
-     background-size: 200% auto;
-     color: white;            
-     box-shadow: 0 0 20px #eee;
-     border-radius: 10px;
-     display: block;
-   }
-   .custom-button:hover {
-     background-position: right center; /* change the direction of the change here */
-     color: #fff;
-     text-decoration: none;
-   }
-
-.gradient-button-orange {background-image: linear-gradient(to right, #D1913C 0%, #FFD194  51%, #D1913C  100%)}
-.gradient-button-orange {
-      margin: 10px;
-      padding: 15px 45px;
-      text-align: center;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: black;
-      font-size: 15px;
-      font-weight: 700;            
-      box-shadow: 0 0 20px #eee;
-      border-radius: 10px;
-      display: block;
-    }
-
-.gradient-button-orange:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
-   
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}

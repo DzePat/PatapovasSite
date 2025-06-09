@@ -1,4 +1,3 @@
-import Particle from "../utils/Particle"
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +31,6 @@ function MainPage() {
  return (      
    <>
    <Container>
-      <Particle/>
       <MyButton onClick={() => navigate("/current")}>Current project</MyButton>
     </Container>
    </>
