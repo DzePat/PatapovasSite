@@ -16,7 +16,7 @@ root.render(
       domain={domain}
       clientId={clientId}
       authorizationParams={{
-          redirect_uri: `${window.location.origin}/dashboard`,
+          redirect_uri: `${window.location.origin}/dashboard/`,
           audience: `${import.meta.env.VITE_AUTH0_AUDIENCE}`
       }}
     >
