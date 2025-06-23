@@ -1,7 +1,6 @@
-import { useEffect,useState} from "react";
-import { Project } from '../models/project';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+import { Project } from '../models/project';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   width: 100vw;
@@ -62,34 +61,28 @@ const MyButton = styled.button`
   }
 `;
 
-function CurrentProject() {
-  const navigate = useNavigate();
-  const [projectData, setData] = useState<Project | null>(null);
-  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
-  const ProjectName = "Patapovas Website";
+type ProjectProp = {
+  prop: Project;
+  show: boolean;
+  onExit: () => void;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(audience + `api/projects?name=${encodeURIComponent(ProjectName)}`);
-      const resjson = await res.json();
-      setData(resjson);
-    };
-    fetchData();
-  }, [ProjectName]);
-  
- return (      
-    <Container>
-      <TextContainer>
-        <MyButton onClick={() => navigate("/")}>X</MyButton>
-        <Title> {projectData?.title}</Title>
-        <Image src={projectData?.img_url[0]}></Image>
-        <Header> Summary</Header>
-        <NormalText>{projectData?.summary}</NormalText>
-        <Header> Description </Header>
-        <NormalText>{projectData?.description}</NormalText>
-      </TextContainer>
-    </Container>
-  );
+function ProjectCard({ prop, show, onExit}: ProjectProp) {
+    if (!show) return null;
+
+    return (      
+        <Container>
+            <TextContainer>
+                <MyButton onClick={onExit}>X</MyButton>
+                <Title> {prop.title}</Title>
+                <Image src={prop.img_url[0]}></Image>
+                <Header> Summary</Header>
+                <NormalText>{prop.summary}</NormalText>
+                <Header> Description </Header>
+                <NormalText>{prop.description}</NormalText>
+            </TextContainer>
+        </Container>
+    );
 }
 
-export default CurrentProject;
+export default ProjectCard;
