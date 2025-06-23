@@ -13,10 +13,12 @@ const MyButton = styled.button`
   padding: 8px 16px;
   border: solid 1px black;
   border-radius: 30px;
-  width: 15vw;
+  width: 16vw;
+  min-width: 200px;
   height: 6vh;
+  min-height: 50px;
   cursor: pointer;
-  font-size: 2vh;
+  font-size: clamp(14px, 2vw, 22px);
   font-weight: bold;
   &:hover {
     background-color: darkcyan;
@@ -33,7 +35,7 @@ const Container = styled.div`
 
 
 function MainPage() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [projectData, setData] = useState<Project>(emptyProject);
   const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
   const ProjectName = "Patapovas Website";

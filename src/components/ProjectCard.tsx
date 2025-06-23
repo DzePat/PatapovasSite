@@ -12,7 +12,9 @@ const Container = styled.div`
 const TextContainer = styled.div`
   position: relative;
   width: 40vw;
+  min-width: 320px;
   height: 80vh;
+  min-height: 420px;
   background-color: rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
@@ -22,7 +24,7 @@ const TextContainer = styled.div`
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: clamp(30px, 2vw, 50px);;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 `
