@@ -15,15 +15,16 @@ const TextContainer = styled.div`
   min-width: 320px;
   height: 80vh;
   min-height: 420px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 50px;
+  border-radius: 30px;
   overflow: auto;
 `
 
 const Title = styled.p`
+  padding: 2vh;
   font-size: clamp(30px, 2vw, 50px);;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -50,11 +51,12 @@ const MyButton = styled.button`
   right: 0;
   background-color: #7b0000;
   color: white;
-  padding: 8px 16px;
   border: solid 1px black;
   border-radius: 30px;
-  width: 60px;
-  height: 60px;
+  width: 8vw;
+  max-width: 60px;
+  height: 8vh;
+  max-height: 60px;
   cursor: pointer;
   font-size: large;
   font-weight: bold;

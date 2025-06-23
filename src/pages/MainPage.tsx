@@ -4,10 +4,6 @@ import ProjectCard from '../components/ProjectCard';
 import { emptyProject, Project } from '../models/project';
 
 const MyButton = styled.button`
-  position: absolute;
-  top: 50%;
-  right: 42.5vw;
-  z-index: 10000;
   background-color: teal;
   color: white;
   padding: 8px 16px;
@@ -41,20 +37,20 @@ function MainPage() {
   const ProjectName = "Patapovas Website";
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(audience + `api/projects?name=${encodeURIComponent(ProjectName)}`);
+      const res = await fetch(audience + `api/project?name=${encodeURIComponent(ProjectName)}`);
       const resjson = await res.json();
       setData(resjson);
-  };
-  fetchData();
-  }, [ProjectName]);
+    };
+    fetchData();
+}, [ProjectName]);
 
 
   return (      
     <>
-    {!show && (
-      <MyButton onClick={() => setShow(true)}>Current Project</MyButton>
-    )}
     <Container>
+      {!show && (
+        <MyButton onClick={() => setShow(true)}>Current Project</MyButton>
+      )}
       <ProjectCard prop={projectData} show={show} onExit={() => setShow(false)}></ProjectCard>
     </Container>
     </>

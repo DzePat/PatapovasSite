@@ -13,7 +13,6 @@ function Dashboard() {
         const token = await getAccessTokenSilently({
         authorizationParams: { audience }
       });
-      console.log(token);
           const res = await fetch("http://localhost:3000/api/private", {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -8,11 +8,11 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navBar">
       <NavLink className="navItem" to="/">Home</NavLink>
+      <NavLink className="navItem" to="/projects">Projects</NavLink>
      {isAuthenticated && (
          <>
           <NavLink className="navItem" to="/dashboard">Dashboard</NavLink>
           <NavLink className="navItem" to="/about">About</NavLink>
-          <NavLink className="navItem" to="/user">Profile</NavLink>
          </>
      )}
     <Dropdown/>
