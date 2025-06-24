@@ -10,7 +10,7 @@ const Router: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/Projects" element={<CollectionPage />} />
+      <Route path="/projects" element={<CollectionPage />} />
       <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" replace />
 } />
     </Routes>

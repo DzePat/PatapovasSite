@@ -5,26 +5,42 @@ import ProjectCard from './ProjectCard';
 
 const CardContainer = styled.div`
   width: 300px;
-  height: 420px;
+  height: 370px;
   background-color: #000000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 50px;
   margin-left: 20px;
+  border: solid 3px white;
+  overflow: hidden;
+
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 200px;
+  }
 `
 
 const Title = styled.p`
-  padding: 2vh;
-  font-size: clamp(15px, 2vw, 20px);;
+  padding: 5px;
+  font-size: 20px;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  @media (max-width: 600px) {
+     font-size: 12px;
+  }
 `
 
 const Image = styled.img`
-    width: 200px;
-    height: auto; 
+    width: 295px;
+    height: auto;
+
+    @media (max-width: 600px) {
+      width: 150px;
+      height: auto;
+    }
 `
 
 type ProjectProp = {
@@ -43,8 +59,8 @@ function CollectionCard({ prop}: ProjectProp) {
     return (
         <>
             <CardContainer onClick={() => setShow(true)}>
-                <Title> {prop.title}</Title>
                 <Image src={prop.img_url[0]}></Image>
+                <Title> {prop.title}</Title>
             </CardContainer>
             {show && (
             <DisplayCard>
