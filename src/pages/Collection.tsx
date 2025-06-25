@@ -24,7 +24,7 @@ function CollectionPage() {
   return (      
     <Container>
       {projectData.map(project => (
-        <CollectionCard key={project.title} prop={project}/>
+        <CollectionCard key={project.title} prop={project} actions={[]}/>
       ))}
     </Container>
   );

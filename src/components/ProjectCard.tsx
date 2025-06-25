@@ -3,6 +3,7 @@ import { Project } from '../models/project';
 import { useEffect, useState } from 'react';
 
 const Container = styled.div`
+  position: fixed;
   width: 100vw;
   height: 80vh;
   background-color: transparent;
@@ -20,11 +21,11 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 30px;
-  overflow: auto;
+  overflow-y: auto;
 `
 
 const Title = styled.p`
-  padding: 2vh;
+  margin-top: 2vw;
   font-size: clamp(30px, 2vw, 50px);;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -41,9 +42,21 @@ const NormalText = styled.p`
   padding: 2vw;
 `
 
+const ImageContainer = styled.div`
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow-x: auto;
+    flex-shrink: 0;
+`
+
 const Image = styled.img`
+    flex: 0 0 auto;
+    padding: 2vw;
     width: 300px;
-    height: auto; 
+    height: auto;
+    object-fit: cover; 
 `
 
 const MyButton = styled.button`
@@ -79,7 +92,11 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
             <TextContainer>
                 <MyButton onClick={onExit}>X</MyButton>
                 <Title> {prop.title}</Title>
-                <Image src={prop.img_url[0]}></Image>
+                <ImageContainer>
+                  {prop.img_url.map(image => (
+                  <Image src={image}></Image>
+                ))}
+                </ImageContainer>
                 <Header> Summary</Header>
                 <NormalText>{prop.summary}</NormalText>
                 <Header> Description </Header>

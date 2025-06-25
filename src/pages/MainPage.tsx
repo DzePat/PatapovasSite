@@ -4,10 +4,10 @@ import ProjectCard from '../components/ProjectCard';
 import { emptyProject, Project } from '../models/project';
 
 const MyButton = styled.button`
-  background-color: teal;
+  background-color: #8f00ca;
   color: white;
   padding: 8px 16px;
-  border: solid 1px black;
+  border: solid 3px black;
   border-radius: 30px;
   width: 16vw;
   min-width: 200px;
@@ -17,7 +17,8 @@ const MyButton = styled.button`
   font-size: clamp(14px, 2vw, 22px);
   font-weight: bold;
   &:hover {
-    background-color: darkcyan;
+    background-color: #c888e2;
+    font-size: 22px;
   }
 `;
 

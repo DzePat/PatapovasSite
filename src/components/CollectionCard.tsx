@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
 
 const CardContainer = styled.div`
+  z-index: 1;
   width: 300px;
   height: 370px;
   background-color: #000000;
@@ -11,10 +12,12 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 50px;
+  position: relative;
+  margin-top: 80px;
   margin-left: 20px;
   border: solid 3px white;
   overflow: hidden;
+  cursor: pointer;
 
   @media (max-width: 600px) {
     width: 150px;
@@ -29,38 +32,75 @@ const Title = styled.p`
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
   @media (max-width: 600px) {
-     font-size: 12px;
+    font-size: 12px;
   }
 `
-
+  
 const Image = styled.img`
-    width: 295px;
+  width: 295px;
+  height: auto;
+  
+  @media (max-width: 600px) {
+    width: 150px;
     height: auto;
-
-    @media (max-width: 600px) {
-      width: 150px;
-      height: auto;
-    }
+  }
 `
-
-type ProjectProp = {
-  prop: Project;
-};
-
 const DisplayCard = styled.div`
   position: absolute;
   width: 300px;
   height: 420px;
   margin-top: 50px;
+  z-index: 3;
+`
+    
+const Cover = styled.div`
+  width: 300px;
+  height: 370px;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  opacity: 0;
+
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 200px;
+  }
+  z-index: 2;
+
+  &:hover {
+    opacity: 1;
+  }
 `
 
-function CollectionCard({ prop}: ProjectProp) {
+const CustomButton = styled.button`
+  background-color: rgba(55,55,55,1);
+  width: 150px;
+  height: 40px;
+  z-index: 3;
+  border-radius: 15px;
+  font-size: clamp(14px, 2vw, 18px);
+`
+
+type ProjectProp = {
+  prop: Project;
+  actions?: React.ReactNode;
+};
+
+
+function CollectionCard({ prop , actions}: ProjectProp) {
     const [show, setShow] = useState(false);
     return (
         <>
-            <CardContainer onClick={() => setShow(true)}>
+            <CardContainer>
                 <Image src={prop.img_url[0]}></Image>
                 <Title> {prop.title}</Title>
+                <Cover>
+                  <CustomButton onClick={() => setShow(true)}>View</CustomButton>
+                  {actions}
+                </Cover>
             </CardContainer>
             {show && (
             <DisplayCard>

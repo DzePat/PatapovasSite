@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import "./Navbar.css";
-import Dropdown from '../dropdown/Dropdown';
+import Sign from '../Sign';
 
 const Navbar: React.FC = () => {
     const {isAuthenticated} = useAuth0();
@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
           <NavLink className="navItem" to="/about">About</NavLink>
          </>
      )}
-    <Dropdown/>
+    <Sign/>
     </nav>
   );
 };

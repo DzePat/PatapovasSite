@@ -47,7 +47,7 @@ const Particle = () => {
       },
       particles: {
         color: {
-          value: ["#5f5f5f"]
+          value: ["#cfb8ea"]
         },
         move: {
           direction: "none",
@@ -56,7 +56,7 @@ const Particle = () => {
           speed: 0.5
         },
         number: {
-          value: 50
+          value: 70
         },
         opacity: {
           animation: {
@@ -74,7 +74,7 @@ const Particle = () => {
         }
       },
       background: {
-        color: "#9f9f9f",
+        color: "#ffffff",
         image: "",
         position: "50% 50%",
         repeat: "no-repeat",

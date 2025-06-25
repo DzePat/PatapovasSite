@@ -1,27 +1,28 @@
 .navBar {
     height: 40px;
     width: 100vw;
-    background: #ffffff; 
+    background: transparent; 
     position: fixed; 
     top: 0; 
     display:flex;
-    justify-content: end;  
+    justify-content: center;  
 }
 
 .navBar .navItem {
     width: 160px;
     height: 40px;
-    border: solid 1px gray;
+    margin-top: 20px;
     text-align: center;
     line-height: 40px;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: larger;
+    font-size: 17px;
     font-weight: bold;
     color: black;
 }
 
 .navBar .navItem:hover {
-    background: lightyellow;
     text-decoration: underline;
+    font-size: 19px;
+    color: #d19e32;
 }
