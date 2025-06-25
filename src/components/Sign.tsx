@@ -35,7 +35,7 @@ const Sign = () => {
             ) : (
                 <ButtonContainer onClick={() => loginWithRedirect({
                         authorizationParams: {
-                        audience: import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE, 
+                        audience: import.meta.env.VITE_AUTH0_AUDIENCE, 
                         scope: "read:data write:data",           
                         prompt: "consent",
                     },
