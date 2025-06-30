@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Project } from '../models/project';
 import { useEffect, useState } from 'react';
-import ProjectCard from './ProjectCard';
+import ProjectCard from './modal/ProjectCard';
 
 const CardContainer = styled.div`
   z-index: 1;
@@ -13,7 +13,7 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  margin-top: 80px;
+  margin-top: 120px;
   margin-left: 20px;
   border: solid 3px white;
   overflow: hidden;
@@ -49,7 +49,6 @@ const DisplayCard = styled.div`
   position: absolute;
   width: 300px;
   height: 420px;
-  margin-top: 50px;
   z-index: 3;
 `
     
@@ -95,7 +94,7 @@ function CollectionCard({ prop , actions}: ProjectProp) {
     return (
         <>
             <CardContainer>
-                <Image src={prop.img_url[0]}></Image>
+                <Image src={prop.img_urls[0]}></Image>
                 <Title> {prop.title}</Title>
                 <Cover>
                   <CustomButton onClick={() => setShow(true)}>View</CustomButton>

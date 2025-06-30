@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import { Project } from '../models/project';
-import { useEffect, useState } from 'react';
+import { Project } from '../../models/project';
 
 const Container = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 80vh;
-  background-color: transparent;
+  position: absolute;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(120,120,120,0.8);
+  z-index: 6;
 `
 const TextContainer = styled.div`
   position: relative;
@@ -22,6 +23,7 @@ const TextContainer = styled.div`
   align-items: center;
   border-radius: 30px;
   overflow-y: auto;
+  overflow-x: hidden;
 `
 
 const Title = styled.p`
@@ -59,7 +61,7 @@ const Image = styled.img`
     object-fit: cover; 
 `
 
-const MyButton = styled.button`
+const ExitButton = styled.button`
   position: absolute;
   right: 0;
   background-color: #7b0000;
@@ -90,11 +92,11 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
     return (      
         <Container>
             <TextContainer>
-                <MyButton onClick={onExit}>X</MyButton>
+                <ExitButton onClick={onExit}>X</ExitButton>
                 <Title> {prop.title}</Title>
                 <ImageContainer>
-                  {prop.img_url.map(image => (
-                  <Image src={image}></Image>
+                  {prop.img_urls.map(image => (
+                  <Image key={image} src={image}></Image>
                 ))}
                 </ImageContainer>
                 <Header> Summary</Header>

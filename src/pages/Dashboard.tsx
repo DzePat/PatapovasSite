@@ -1,27 +1,27 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect,useState} from "react";
+import { useEffect,useState, useRef} from "react";
 import styled from 'styled-components';
 import { Project } from "../models/project";
 import CollectionCard from "../components/CollectionCard";
+import AddProject from "../components/modal/AddProject";
+import {fetchProjects} from "../services/projectservice";
 
 const Container = styled.nav`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
 const ProjectContainer = styled.nav`
-  margin-top: 60px;
   width: 100%;
   height: 100vh;
   display: flex;
 `
 
 const ButtonContainer = styled.div`
+    width: 100%;
     position: fixed;
-    top: 0;
-    right: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -29,7 +29,9 @@ const ButtonContainer = styled.div`
     margin-top: 60px;
 `
 
-const ButtonText = styled.p`
+const CustomButton = styled.button`
+    background: none;
+    border: none;
     margin-right: 2vw;
     text-align: center;
     line-height: 40px;
@@ -39,6 +41,7 @@ const ButtonText = styled.p`
     font-weight: bold;
     color: Black;
     cursor: pointer;
+    user-select: none;
     &:hover {
         text-decoration: underline;
         font-size: 19px;
@@ -46,7 +49,7 @@ const ButtonText = styled.p`
     }
 `
 
-const CustomButton = styled.button`
+const OptionButton = styled.button`
   margin: 4px;
   background-color: rgba(55,55,55,1);
   width: 150px;
@@ -55,6 +58,8 @@ const CustomButton = styled.button`
   border-radius: 15px;
   font-size: clamp(14px, 2vw, 18px);
 `
+
+
 
 function editProject(){
   console.log("clicked edit project");
@@ -66,60 +71,47 @@ function deleteProject(){
 
 function Dashboard() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-  const [showProjects, setShowProjects] = useState<boolean>(false);
+  const [showAdd, setShowAdd] = useState<boolean>(false);
   const [projectData, setData] = useState<Project[]>([]);
-  if(isAuthenticated){
-    const [message, setMessage] = useState<string>();
-    const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
-  
-    useEffect(() => {
-    const fetchData = async () => {
-      const fetchData = async () => {
-          const res = await fetch(audience + `api/projects`);
-          const resjson = await res.json();
-          setData(resjson);
-      };
-      fetchData();
-      try {
-        const token = await getAccessTokenSilently({
-        authorizationParams: { audience }
-      });
-          const res = await fetch(audience + "api/private", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-  
-          const data = await res.json();
-          setMessage(data.message);
-        } catch (err) {
-          console.error("Failed to fetch protected data:", err);
-        }
-      };
-      fetchData();
-    }, [getAccessTokenSilently]);
+  const [token, setToken] = useState<string>("");
+  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
+
+  useEffect(() => {
+  if (!isAuthenticated) return;
     
-    console.log("message", message)
-  }
+  const fetchData = async () => {   
+      const token = await getAccessTokenSilently({
+        authorizationParams: { audience },
+      });
+      setToken(token);
+      const resjon = await fetchProjects();  
+      setData(resjon);
+    };
+
+    fetchData();
+  }, [isAuthenticated]);
+
+  console.log("dashboard");
+
  return (      
     <Container>
+        {showAdd && (
+          <AddProject onExit={() => setShowAdd(false)} token={token}></AddProject>
+        )}
         <ButtonContainer>
-           <ButtonText onClick={() => showProjects? setShowProjects(false) : setShowProjects(true)}>Edit Project</ButtonText>
-           <ButtonText>Add Project</ButtonText>
+           <CustomButton onClick={() => setShowAdd(true)}>Add Project</CustomButton>
         </ButtonContainer>
-        {showProjects &&
         <ProjectContainer>
           {projectData.map(project => (
             <CollectionCard key={project.title} prop={project} 
               actions=
               {(<>
-                <CustomButton onClick={() => editProject()}>Edit</CustomButton>
-                <CustomButton onClick={() => deleteProject()}>Delete</CustomButton>
+                <OptionButton onClick={() => editProject()}>Edit</OptionButton>
+                <OptionButton onClick={() => deleteProject()}>Delete</OptionButton>
               </>)}
             />
           ))}
         </ProjectContainer>
-        }
     </Container>
   );
 }

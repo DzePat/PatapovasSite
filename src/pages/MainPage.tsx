@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useEffect,useState} from 'react';
-import ProjectCard from '../components/ProjectCard';
+import ProjectCard from '../components/modal/ProjectCard';
 import { emptyProject, Project } from '../models/project';
+import { fetchProjects } from '../services/projectservice';
+import { getLatestProject } from '../utils/sort';
 
 const MyButton = styled.button`
   background-color: #8f00ca;
@@ -30,20 +32,16 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-
 function MainPage() {
   const [show, setShow] = useState(false);
   const [projectData, setData] = useState<Project>(emptyProject);
-  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
-  const ProjectName = "Patapovas Website";
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(audience + `api/project?name=${encodeURIComponent(ProjectName)}`);
-      const resjson = await res.json();
-      setData(resjson);
+      const resjson = await fetchProjects();
+      setData(getLatestProject(resjson));
     };
     fetchData();
-}, [ProjectName]);
+}, []);
 
 
   return (      
