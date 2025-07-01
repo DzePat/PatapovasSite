@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Project } from "../models/project";
 import CollectionCard from "../components/CollectionCard";
 import AddProject from "../components/modal/AddProject";
-import {fetchProjects} from "../services/projectservice";
+import {fetchProjects, removeProjectById} from "../services/projectservice";
 
 const Container = styled.nav`
   width: 100vw;
@@ -65,7 +65,7 @@ function editProject(){
   console.log("clicked edit project");
 }
 
-function deleteProject(){
+function deleteProject(id: string){
   console.log("clicked delete project");
 }
 
@@ -84,14 +84,12 @@ function Dashboard() {
         authorizationParams: { audience },
       });
       setToken(token);
-      const resjon = await fetchProjects();  
+      const resjon = await fetchProjects(); 
       setData(resjon);
     };
 
     fetchData();
   }, [isAuthenticated]);
-
-  console.log("dashboard");
 
  return (      
     <Container>
@@ -107,7 +105,7 @@ function Dashboard() {
               actions=
               {(<>
                 <OptionButton onClick={() => editProject()}>Edit</OptionButton>
-                <OptionButton onClick={() => deleteProject()}>Delete</OptionButton>
+                <OptionButton onClick={() => removeProjectById(project.id,token)}>Delete</OptionButton>
               </>)}
             />
           ))}

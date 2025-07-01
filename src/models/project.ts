@@ -1,4 +1,5 @@
 export type Project = {
+  id: string;
   created_at: { _seconds: number; _nanoseconds: number };
   description: string;
   summary: string;
@@ -8,6 +9,7 @@ export type Project = {
 }
 
 export const emptyProject: Project = {
+  id: "",
   created_at: { _seconds: 0, _nanoseconds: 0 },
   description: "loading",
   summary: "loading",
