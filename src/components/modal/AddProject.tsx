@@ -3,7 +3,7 @@ import ErrorMessage from '../ErrorMessage';
 import { useState, useRef, useEffect } from 'react';
 import { postProject } from '../../services/projectservice';
 import { validateProjectForm } from '../../utils/validation';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Project } from '../../models/project';
 
 const AddBackground = styled.div`
   position: absolute;
@@ -139,21 +139,34 @@ const AddButton = styled.button`
 interface ProjectFormRef {
     docid: HTMLInputElement | null;
     title: HTMLInputElement | null;
+    github: HTMLInputElement | null;
     summary: HTMLTextAreaElement | null;
     description: HTMLTextAreaElement | null;
     urls: HTMLInputElement | null;
 } 
 
 type ProjectProp = {
+  project: Project | null;
   onExit: () => void;
   token: string;
 };
 
-function AddProject({ onExit,token}: ProjectProp) {
+function AddProject({ onExit,token, project}: ProjectProp) {
   const [urls, setUrls] = useState<string[]>([]);
-  const inputRef = useRef<ProjectFormRef>({docid: null,title: null, summary: null, description: null, urls: null});
+  const inputRef = useRef<ProjectFormRef>({docid: null,title: null, summary: null, description: null, urls: null, github: null});
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
+
+  if(project){
+    useEffect(() => {
+      if (inputRef.current.docid) inputRef.current.docid.value = project.id;
+      if (inputRef.current.title) inputRef.current.title.value = project.title;
+      if (inputRef.current.github) inputRef.current.github.value = project.github;
+      if (inputRef.current.summary) inputRef.current.summary.value = project.summary;
+      if (inputRef.current.description) inputRef.current.description.value = project.description;
+      setUrls(project.img_urls);
+    }, []);
+  }
 
   function addurl() {
     const url = inputRef.current.urls?.value.trim();
@@ -167,6 +180,7 @@ function AddProject({ onExit,token}: ProjectProp) {
     const projectForm = {
       docid: inputRef.current.docid?.value.trim(),
       title: inputRef.current.title?.value.trim() ,
+      github: inputRef.current.github?.value.trim(),
       summary: inputRef.current.summary?.value.trim(),
       description: inputRef.current.description?.value.trim(),
       img_urls: urls,
@@ -181,6 +195,7 @@ function AddProject({ onExit,token}: ProjectProp) {
       setShowError(true);
     }else{
       postProject(projectForm, token);
+      onExit();
     }
   }    
     return (      
@@ -194,6 +209,10 @@ function AddProject({ onExit,token}: ProjectProp) {
                     <InputContainer>
                         <InputText>Title</InputText>
                         <InputLine ref={el => {inputRef.current.title = el}} placeholder="Project title"></InputLine>
+                    </InputContainer>
+                    <InputContainer>
+                        <InputText>Github</InputText>
+                        <InputLine ref={el => {inputRef.current.github = el}} placeholder="Github link or emtpy string"></InputLine>
                     </InputContainer>
                     <InputContainer>
                         <InputText>Summary</InputText>
@@ -210,7 +229,7 @@ function AddProject({ onExit,token}: ProjectProp) {
                     ))
                     }
                     <UrlContainer>
-                        <InputLine ref={el => {inputRef.current.urls = el}} placeholder="Image url"></InputLine>
+                        <InputLine ref={el => {inputRef.current.urls = el}} placeholder="Recommend 1:1 ratio 300px max"></InputLine>
                         <UrlButton onClick={() => addurl()}>+</UrlButton>
                     </UrlContainer>
               </InputContainer>

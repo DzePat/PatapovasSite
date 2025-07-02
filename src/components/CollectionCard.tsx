@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import ProjectCard from './modal/ProjectCard';
 
 const CardContainer = styled.div`
-  z-index: 1;
   width: 300px;
   height: 370px;
   background-color: #000000;
@@ -13,7 +12,6 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  margin-top: 120px;
   margin-left: 20px;
   border: solid 3px white;
   overflow: hidden;
@@ -49,7 +47,6 @@ const DisplayCard = styled.div`
   position: absolute;
   width: 300px;
   height: 420px;
-  z-index: 3;
 `
     
 const Cover = styled.div`
@@ -67,7 +64,6 @@ const Cover = styled.div`
     width: 150px;
     height: 200px;
   }
-  z-index: 2;
 
   &:hover {
     opacity: 1;
@@ -78,7 +74,6 @@ const CustomButton = styled.button`
   background-color: rgba(55,55,55,1);
   width: 150px;
   height: 40px;
-  z-index: 3;
   border-radius: 15px;
   font-size: clamp(14px, 2vw, 18px);
 `

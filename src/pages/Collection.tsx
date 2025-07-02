@@ -6,7 +6,10 @@ import CollectionCard from '../components/CollectionCard';
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  padding-top: 120px;
+  box-sizing: border-box; 
   display: flex;
+  flex-wrap: wrap;
   z-index: 5;
 `;
 

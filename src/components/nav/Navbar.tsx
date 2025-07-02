@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
           <NavLink className="navItem" to="/about">About</NavLink>
          </>
      )}
-    <Sign/>
+      <Sign/>
     </nav>
   );
 };

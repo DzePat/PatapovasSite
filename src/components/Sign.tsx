@@ -1,10 +1,17 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from 'styled-components';
 
+const container = styled.div`
+
+`
+
 const ButtonContainer = styled.div`
     width: 160px;
     height: 40px;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const ButtonText = styled.p`
@@ -27,7 +34,7 @@ const Sign = () => {
     const { logout,loginWithRedirect, isAuthenticated} = useAuth0();
 
     return (
-        <div className="dropdown">
+        <>
             {isAuthenticated ? (
             <ButtonContainer onClick={() => logout()}>
                 <ButtonText>Sign out</ButtonText>
@@ -43,7 +50,7 @@ const Sign = () => {
                 <ButtonText>Sign in</ButtonText>
             </ButtonContainer>
             )}
-        </div>
+        </>
         )
 }
 

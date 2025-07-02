@@ -2,14 +2,16 @@ import styled from 'styled-components';
 import { Project } from '../../models/project';
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
   background-color: rgba(120,120,120,0.8);
-  z-index: 6;
+  z-index: 51;
 `
 const TextContainer = styled.div`
   position: relative;
@@ -17,7 +19,7 @@ const TextContainer = styled.div`
   min-width: 320px;
   height: 80vh;
   min-height: 420px;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,17 +33,20 @@ const Title = styled.p`
   font-size: clamp(30px, 2vw, 50px);;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: black;
 `
 const Header = styled.header`
   font-size: 30px;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: black;
 `
 
 const NormalText = styled.p`
   font-size: larger;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   padding: 2vw;
+  color: black;
 `
 
 const ImageContainer = styled.div`
@@ -80,6 +85,13 @@ const ExitButton = styled.button`
   }
 `;
 
+const Github = styled.a`
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  padding: 10px
+`
+
 type ProjectProp = {
   prop: Project;
   show: boolean;
@@ -88,7 +100,11 @@ type ProjectProp = {
 
 function ProjectCard({ prop, show, onExit}: ProjectProp) {
     if (!show) return null;
-
+    
+    const url = prop.github === '' ? '' : (prop.github.startsWith('http://') || prop.github.startsWith('https://')
+      ? prop.github
+      : `https://${prop.github.trim()}`);
+    
     return (      
         <Container>
             <TextContainer>
@@ -99,6 +115,8 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
                   <Image key={image} src={image}></Image>
                 ))}
                 </ImageContainer>
+                <Header> Github </Header>
+                <Github href={url} target="_blank" rel="noopener noreferrer">{url}</Github>
                 <Header> Summary</Header>
                 <NormalText>{prop.summary}</NormalText>
                 <Header> Description </Header>

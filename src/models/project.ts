@@ -5,6 +5,7 @@ export type Project = {
   summary: string;
   img_urls: string[];
   title: string;
+  github: string;
   updated_at: { _seconds: number; _nanoseconds: number };
 }
 
@@ -15,5 +16,6 @@ export const emptyProject: Project = {
   summary: "loading",
   img_urls: ["loading"],
   title: "loading",
+  github: "",
   updated_at: { _seconds: 0, _nanoseconds: 0 },
 };

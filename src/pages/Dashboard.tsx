@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect,useState, useRef} from "react";
 import styled from 'styled-components';
-import { Project } from "../models/project";
+import { emptyProject, Project } from "../models/project";
 import CollectionCard from "../components/CollectionCard";
 import AddProject from "../components/modal/AddProject";
 import {fetchProjects, removeProjectById} from "../services/projectservice";
@@ -11,12 +11,15 @@ const Container = styled.nav`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 `;
 
 const ProjectContainer = styled.nav`
   width: 100%;
   height: 100vh;
   display: flex;
+  padding-top: 120px;
+  flex-wrap: wrap;
 `
 
 const ButtonContainer = styled.div`
@@ -71,7 +74,9 @@ function deleteProject(id: string){
 
 function Dashboard() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-  const [showAdd, setShowAdd] = useState<boolean>(false);
+  const [showAdd, setShowAdd] = useState<{
+    show: boolean,
+    project: Project | null}>({show: false,project: null});
   const [projectData, setData] = useState<Project[]>([]);
   const [token, setToken] = useState<string>("");
   const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
@@ -93,19 +98,19 @@ function Dashboard() {
 
  return (      
     <Container>
-        {showAdd && (
-          <AddProject onExit={() => setShowAdd(false)} token={token}></AddProject>
+        {showAdd.show && (
+          <AddProject onExit={() => setShowAdd({show: false,project: null})} token={token} project={showAdd.project}></AddProject>
         )}
         <ButtonContainer>
-           <CustomButton onClick={() => setShowAdd(true)}>Add Project</CustomButton>
+           <CustomButton onClick={() => setShowAdd({show: true,project: null})}>Add Project</CustomButton>
         </ButtonContainer>
         <ProjectContainer>
-          {projectData.map(project => (
-            <CollectionCard key={project.title} prop={project} 
+          {projectData.map(document => (
+            <CollectionCard key={document.title} prop={document} 
               actions=
               {(<>
-                <OptionButton onClick={() => editProject()}>Edit</OptionButton>
-                <OptionButton onClick={() => removeProjectById(project.id,token)}>Delete</OptionButton>
+                <OptionButton onClick={() => setShowAdd({show: true,project: document})}>Edit</OptionButton>
+                <OptionButton onClick={() => removeProjectById(document.id,token)}>Delete</OptionButton>
               </>)}
             />
           ))}
