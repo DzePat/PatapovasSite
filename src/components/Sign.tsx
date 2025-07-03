@@ -1,10 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from 'styled-components';
 
-const container = styled.div`
-
-`
-
 const ButtonContainer = styled.div`
     width: 160px;
     height: 40px;

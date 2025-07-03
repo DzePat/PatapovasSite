@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { postProject } from '../../services/projectservice';
 import { validateProjectForm } from '../../utils/validation';
 import { Project } from '../../models/project';
+import { InputFieldLine, InputFieldArea } from '../InputField';
 
 const AddBackground = styled.div`
   position: absolute;
@@ -67,16 +68,6 @@ const InputLine = styled.input`
   background-color: white;
   text-align: center;
   color: blacK;
-`
-
-const InputArea = styled.textarea`
-  width: 35vw;
-  min-width: 280px;
-  height: 15vw;
-  min-height: 100px;
-  padding: 5px;
-  background-color: white;
-  color: black;
 `
 
 const InputText = styled.label`
@@ -149,9 +140,10 @@ type ProjectProp = {
   project: Project | null;
   onExit: () => void;
   token: string;
+  onSuccess: () => void;
 };
 
-function AddProject({ onExit,token, project}: ProjectProp) {
+function AddProject({ onExit,token, project,onSuccess}: ProjectProp) {
   const [urls, setUrls] = useState<string[]>([]);
   const inputRef = useRef<ProjectFormRef>({docid: null,title: null, summary: null, description: null, urls: null, github: null});
   const [showError, setShowError] = useState(false);
@@ -194,50 +186,57 @@ function AddProject({ onExit,token, project}: ProjectProp) {
       setErrorMessage(errors);
       setShowError(true);
     }else{
-      postProject(projectForm, token);
+      await postProject(projectForm, token);
+      onSuccess();
       onExit();
     }
-  }    
-    return (      
-        <AddBackground>
-            <AddContainer>
-                <ExitButton onClick={() => onExit()}>X</ExitButton>
-                    <InputContainer>
-                        <InputText>Document ID</InputText>
-                        <InputLine ref={el => {inputRef.current.docid = el}} placeholder="Title or custom"></InputLine>
-                    </InputContainer>
-                    <InputContainer>
-                        <InputText>Title</InputText>
-                        <InputLine ref={el => {inputRef.current.title = el}} placeholder="Project title"></InputLine>
-                    </InputContainer>
-                    <InputContainer>
-                        <InputText>Github</InputText>
-                        <InputLine ref={el => {inputRef.current.github = el}} placeholder="Github link or emtpy string"></InputLine>
-                    </InputContainer>
-                    <InputContainer>
-                        <InputText>Summary</InputText>
-                        <InputArea ref={el => {inputRef.current.summary = el}}></InputArea>
-                    </InputContainer>
-                    <InputContainer>
-                        <InputText>Description</InputText>
-                        <InputArea ref={el => {inputRef.current.description = el}}></InputArea>
-                    </InputContainer>
-                <InputContainer>
-                    <InputText>Image Urls</InputText>
-                    {urls.map(url => (
-                        <UrlText key={url}>{url} <UrlDeleteButton onClick={() => setUrls(prev => prev.filter(u => u !== url))}>X</UrlDeleteButton></UrlText>
-                    ))
-                    }
-                    <UrlContainer>
-                        <InputLine ref={el => {inputRef.current.urls = el}} placeholder="Recommend 1:1 ratio 300px max"></InputLine>
-                        <UrlButton onClick={() => addurl()}>+</UrlButton>
-                    </UrlContainer>
-              </InputContainer>
-              <AddButton onClick={() => submit()}>Add Project</AddButton>
-            </AddContainer>
-            <ErrorMessage messages={errorMessage} visible={showError} onHide={() => setShowError(false)}/>
-          </AddBackground>
-    );
+  }
+
+  return (      
+    <AddBackground>
+      <AddContainer>
+          <ExitButton onClick={() => onExit()}>X</ExitButton>
+            <InputFieldLine
+              label='Document ID'
+              placeholder='Title or custom'
+              ref={el => {inputRef.current.docid = el}}>
+            </InputFieldLine>
+            <InputFieldLine
+              label='Title'
+              placeholder='Project title'
+              ref={el => {inputRef.current.title = el}}>
+            </InputFieldLine>
+            <InputFieldLine
+              label='Github'
+              placeholder='Github link or emtpy string'
+              ref={el => {inputRef.current.github = el}}>
+            </InputFieldLine>
+            <InputFieldArea
+              label='Summary'
+              placeholder='Short description about the project'
+              ref={el => {inputRef.current.summary = el}}>
+            </InputFieldArea>
+            <InputFieldArea
+              label='Description'
+              placeholder='Reason for the project, used libraries and more.'
+              ref={el => {inputRef.current.description = el}}>
+            </InputFieldArea>  
+            <InputContainer>
+              <InputText>Image Urls</InputText>
+              {urls.map(url => (
+                  <UrlText key={url}>{url} <UrlDeleteButton onClick={() => setUrls(prev => prev.filter(u => u !== url))}>X</UrlDeleteButton></UrlText>
+              ))
+              }
+              <UrlContainer>
+                  <InputLine ref={el => {inputRef.current.urls = el}} placeholder="Recommend 1:1 ratio 300px max"></InputLine>
+                  <UrlButton onClick={() => addurl()}>+</UrlButton>
+              </UrlContainer>
+            </InputContainer>
+        <AddButton onClick={() => submit()}>Add Project</AddButton>
+      </AddContainer>
+      <ErrorMessage messages={errorMessage} visible={showError} onHide={() => setShowError(false)}/>
+    </AddBackground>
+  );
 }
 
 export default AddProject;

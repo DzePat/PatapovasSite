@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect,useState} from 'react';
-import { emptyProject, Project } from '../models/project';
+import { Project } from '../models/project';
 import CollectionCard from '../components/CollectionCard';
 
 const Container = styled.div`

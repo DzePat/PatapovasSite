@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect,useState, useRef} from "react";
+import { useEffect,useState, useCallback} from "react";
 import styled from 'styled-components';
-import { emptyProject, Project } from "../models/project";
+import {  Project } from "../models/project";
 import CollectionCard from "../components/CollectionCard";
 import AddProject from "../components/modal/AddProject";
 import {fetchProjects, removeProjectById} from "../services/projectservice";
@@ -62,16 +62,6 @@ const OptionButton = styled.button`
   font-size: clamp(14px, 2vw, 18px);
 `
 
-
-
-function editProject(){
-  console.log("clicked edit project");
-}
-
-function deleteProject(id: string){
-  console.log("clicked delete project");
-}
-
 function Dashboard() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [showAdd, setShowAdd] = useState<{
@@ -81,25 +71,24 @@ function Dashboard() {
   const [token, setToken] = useState<string>("");
   const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
 
+  const fetchData = useCallback(async () => {
+    const resjson = await fetchProjects();
+    setData(resjson);
+  }, []);
+  
+
   useEffect(() => {
   if (!isAuthenticated) return;
-    
-  const fetchData = async () => {   
-      const token = await getAccessTokenSilently({
-        authorizationParams: { audience },
-      });
-      setToken(token);
-      const resjon = await fetchProjects(); 
-      setData(resjon);
-    };
-
+    getAccessTokenSilently({
+      authorizationParams: { audience },
+    }).then(setToken);
     fetchData();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, fetchData, getAccessTokenSilently, audience]);
 
  return (      
     <Container>
         {showAdd.show && (
-          <AddProject onExit={() => setShowAdd({show: false,project: null})} token={token} project={showAdd.project}></AddProject>
+          <AddProject onExit={() => setShowAdd({show: false,project: null})} token={token} project={showAdd.project} onSuccess={fetchData}></AddProject>
         )}
         <ButtonContainer>
            <CustomButton onClick={() => setShowAdd({show: true,project: null})}>Add Project</CustomButton>
@@ -110,7 +99,7 @@ function Dashboard() {
               actions=
               {(<>
                 <OptionButton onClick={() => setShowAdd({show: true,project: document})}>Edit</OptionButton>
-                <OptionButton onClick={() => removeProjectById(document.id,token)}>Delete</OptionButton>
+                <OptionButton onClick={async () => {await removeProjectById(document.id,token); await fetchData();}}>Delete</OptionButton>
               </>)}
             />
           ))}
