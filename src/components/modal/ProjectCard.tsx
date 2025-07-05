@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Project } from '../../models/project';
 import { Loading } from '../Loading';
+import { useState } from 'react';
 
 const Container = styled.div`
   position: fixed;
@@ -88,7 +89,7 @@ const ExitButton = styled.button`
 
 const Github = styled.a`
   font-size: 14px;
-  color: white;
+  color: black;
   cursor: pointer;
   padding: 10px
 `
@@ -101,11 +102,6 @@ type ProjectProp = {
 
 function ProjectCard({ prop, show, onExit}: ProjectProp) {
     if (!show) return null;
-    
-    const url = prop.github === '' ? '' : (prop.github.startsWith('http://') || prop.github.startsWith('https://')
-      ? prop.github
-      : `https://${prop.github.trim()}`);
-    
     return (      
         <Container>
               <TextContainer>
@@ -120,13 +116,13 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
                     ))}
                   </ImageContainer>
                   <Header> Github </Header>
-                  <Github href={url} target="_blank" rel="noopener noreferrer">{url}</Github>
+                  <Github href={prop.github} target="_blank" rel="noopener noreferrer">{prop.github}</Github>
                   <Header> Summary</Header>
                   <NormalText>{prop.summary}</NormalText>
                   <Header> Description </Header>
                   <NormalText>{prop.description}</NormalText>
-                  </>
-                  }
+                </>
+              }
               </TextContainer>    
         </Container>
     );
