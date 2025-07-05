@@ -2,20 +2,26 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 5;
 `;
 
 const TextContainer = styled.div`
     width: 60vw;
+    min-width: 250px;
     height: 80vh;
+    min-height: 350px;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-y; auto;
 `
 
 const TextHeader = styled.h1`

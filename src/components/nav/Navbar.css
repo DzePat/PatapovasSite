@@ -1,11 +1,10 @@
 .navBar {
-    height: 40px;
-    width: 100vw;
-    background: transparent; 
+    height: 50px;
+    background: white; 
     position: fixed; 
-    top: 0; 
-    display:flex;
+    display: flex;
     justify-content: center;
+    align-items: center;
     z-index: 5;  
 }
 
