@@ -5,10 +5,12 @@ import Sign from '../Sign';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  widht: 100vw;
-  height: 50px;
+  width: 100vw;
+  height: 40px;
   display: flex;
   justify-content: center;
+  z-index: 5;
+  position: fixed; 
 `
 const Navbar: React.FC = () => {
     const {isAuthenticated} = useAuth0();

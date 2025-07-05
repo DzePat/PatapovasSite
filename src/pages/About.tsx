@@ -9,6 +9,7 @@ const Container = styled.div`
   box-sizing: border-box;
   overflow-y: auto;
   z-index: 5;
+  padding-top: 120px;
 `;
 
 const TextContainer = styled.div`

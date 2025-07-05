@@ -3,16 +3,19 @@ import styled from 'styled-components';
 
 const ButtonContainer = styled.div`
     width: 160px;
-    height: 40px;
-    margin-top: 20px;
+    height: 50px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 600px) {
+        width: 100px;
+    }
 `
 
 const ButtonText = styled.p`
     text-align: center;
-    line-height: 40px;
+    line-height: 50px;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
