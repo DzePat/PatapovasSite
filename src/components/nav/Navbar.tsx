@@ -9,10 +9,10 @@ const Navbar: React.FC = () => {
     <nav className="navBar">
       <NavLink className="navItem" to="/">Home</NavLink>
       <NavLink className="navItem" to="/projects">Projects</NavLink>
+      <NavLink className="navItem" to="/about">About</NavLink>
      {isAuthenticated && (
          <>
           <NavLink className="navItem" to="/dashboard">Dashboard</NavLink>
-          <NavLink className="navItem" to="/about">About</NavLink>
          </>
      )}
       <Sign/>

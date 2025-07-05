@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { useEffect,useState} from 'react';
+import { useEffect,useState, useCallback} from 'react';
 import { Project } from '../models/project';
 import CollectionCard from '../components/CollectionCard';
+import { Loading } from '../components/Loading';
+import { fetchProjects } from '../services/projectservice';
 
 const Container = styled.div`
   width: 100vw;
@@ -16,20 +18,24 @@ const Container = styled.div`
 function CollectionPage() {
   const [projectData, setData] = useState<Project[]>([]);
   const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(audience + `api/projects`);
-      const resjson = await res.json();
+
+  const fetchData = useCallback(async () => {
+      const resjson = await fetchProjects();
       setData(resjson);
-    };
+  }, []);
+
+  useEffect(() => {
     fetchData();
   }, []);
 
   return (      
     <Container>
-      {projectData.map(project => (
+      {!projectData && 
+      <Loading></Loading>}
+      {projectData && projectData.map(project => (
         <CollectionCard key={project.title} prop={project} actions={[]}/>
       ))}
+
     </Container>
   );
 }

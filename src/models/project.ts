@@ -12,10 +12,10 @@ export type Project = {
 export const emptyProject: Project = {
   id: "",
   created_at: { _seconds: 0, _nanoseconds: 0 },
-  description: "loading",
-  summary: "loading",
-  img_urls: ["loading"],
-  title: "loading",
+  description: "",
+  summary: "",
+  img_urls: [""],
+  title: "Loading",
   github: "",
   updated_at: { _seconds: 0, _nanoseconds: 0 },
 };

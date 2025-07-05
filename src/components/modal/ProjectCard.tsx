@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Project } from '../../models/project';
+import { Loading } from '../Loading';
 
 const Container = styled.div`
   position: fixed;
@@ -107,21 +108,26 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
     
     return (      
         <Container>
-            <TextContainer>
-                <ExitButton onClick={onExit}>X</ExitButton>
-                <Title> {prop.title}</Title>
-                <ImageContainer>
-                  {prop.img_urls.map(image => (
-                  <Image key={image} src={image}></Image>
-                ))}
-                </ImageContainer>
-                <Header> Github </Header>
-                <Github href={url} target="_blank" rel="noopener noreferrer">{url}</Github>
-                <Header> Summary</Header>
-                <NormalText>{prop.summary}</NormalText>
-                <Header> Description </Header>
-                <NormalText>{prop.description}</NormalText>
-            </TextContainer>
+              <TextContainer>
+              {(prop.title === "Loading") && <Loading></Loading>}
+              <ExitButton onClick={onExit}>X</ExitButton>
+              {(prop.title != "Loading") && 
+                <>
+                  <Title> {prop.title}</Title>
+                  <ImageContainer>
+                    {prop.img_urls.map(image => (
+                      <Image key={image} src={image}></Image>
+                    ))}
+                  </ImageContainer>
+                  <Header> Github </Header>
+                  <Github href={url} target="_blank" rel="noopener noreferrer">{url}</Github>
+                  <Header> Summary</Header>
+                  <NormalText>{prop.summary}</NormalText>
+                  <Header> Description </Header>
+                  <NormalText>{prop.description}</NormalText>
+                  </>
+                  }
+              </TextContainer>    
         </Container>
     );
 }
