@@ -69,7 +69,7 @@ function Dashboard() {
     project: Project | null}>({show: false,project: null});
   const [projectData, setData] = useState<Project[]>([]);
   const [token, setToken] = useState<string>("");
-  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
+  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
   const fetchData = useCallback(async () => {
     const resjson = await fetchProjects();
