@@ -52,20 +52,19 @@ const NormalText = styled.p`
 `
 
 const ImageContainer = styled.div`
-    width: 600px;
+    width: 400px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flext-start;
     overflow-x: auto;
     flex-shrink: 0;
 `
 
 const Image = styled.img`
-    flex: 0 0 auto;
     padding: 2vw;
     width: 300px;
     height: auto;
-    object-fit: cover; 
+    object-fit: cover;
 `
 
 const ExitButton = styled.button`
