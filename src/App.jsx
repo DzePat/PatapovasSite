@@ -12,7 +12,7 @@ return (
     {!error && !isLoading && (
       <>
         <Navbar/>
-        <Particle/>
+          <Particle/>
         <Router/>
       </>
     )}

@@ -17,11 +17,12 @@ const Container = styled.div`
 
 function CollectionPage() {
   const [projectData, setData] = useState<Project[]>([]);
-  const audience = import.meta.env.VITE_AUTH0_BACKEND_AUDIENCE;
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
       const resjson = await fetchProjects();
       setData(resjson);
+      setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function CollectionPage() {
 
   return (      
     <Container>
-      {!projectData && 
+      {isLoading && 
       <Loading></Loading>}
       {projectData && projectData.map(project => (
         <CollectionCard key={project.title} prop={project} actions={[]}/>

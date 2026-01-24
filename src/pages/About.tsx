@@ -17,7 +17,7 @@ const TextContainer = styled.div`
     min-width: 250px;
     height: 80vh;
     min-height: 350px;
-    background-color: white;
+    color: rgba(255, 255, 255, 0.95);
     display: flex;
     flex-direction: column;
     align-items: center;

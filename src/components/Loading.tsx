@@ -2,10 +2,10 @@ import styled from "styled-components"
 
 const LoadingSVG = styled.svg`
     position: absolute;
-    top: 40%;
-    right: 40%;
-    width: 20%;
-    height: 20%;
+    top: 45%;
+    right: 45%;
+    width: 10vw;
+    height: 10vh;
     fill: none;
     stroke: black;
     stroke-width: 2px;

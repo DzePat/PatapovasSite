@@ -47,30 +47,30 @@ const Particle = () => {
       },
       particles: {
         color: {
-          value: ["#cfb8ea"]
+          value: ["#FFD700"]
         },
         move: {
           direction: "none",
           enable: true,
           outModes: "bounce",
-          speed: 0.5
+          speed: 1
         },
         number: {
-          value: 70
+          value: 30
         },
         opacity: {
           animation: {
             enable: true,
-            speed: 1,
+            speed: 0.1,
             sync: false
           },
-          value: { min: 0.3, max: 1 }
+          value: { min: 0, max: 0.8 }
         },
         shape: {
           type: "circle"
         },
         size: {
-          value: 5
+          value: 10
         }
       },
       background: {
