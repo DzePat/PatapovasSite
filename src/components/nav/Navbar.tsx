@@ -5,10 +5,12 @@ import Sign from '../Sign';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  height: 50px;
   width: 100vw;
-  height: 40px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: cener;
   z-index: 5;
   position: fixed; 
 `
