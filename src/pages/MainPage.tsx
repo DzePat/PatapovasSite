@@ -10,8 +10,8 @@ const Container = styled.div`
   padding-top: 70px;
 `;
 const ImageContainer = styled.img`
-  width: 10vw;
-  height: 10vh;
+  width: 9vw;
+  height: 9vh;
   object-fit: contain;
 `;
 
@@ -42,14 +42,14 @@ const TextContainer = styled.div`
 `;
 
 const HeaderOne = styled.label`
-  font-family: 'Papyrus', times, serif;
+  font-family: 'Inter', times, serif;
   color: black;
   font-weight: bold;
   font-size: 4vh;
 `;
 
 const HeaderTwo = styled.label`
-  font-family: 'Lucida Handwriting', times, serif;
+  font-family: 'Inter', times, serif;
   margin: 1vh;
   color: black;
   font-weight: bold;
@@ -57,7 +57,7 @@ const HeaderTwo = styled.label`
 `;
 
 const CustomText = styled.p`
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", Times, serif;
   color: black;
   font-size: 2vh;
   text-align: center;
@@ -93,9 +93,9 @@ function MainPage() {
             <ImageContainer src='https://imgur.com/3Z2q8QC.png' alt='Github'></ImageContainer>
             <ImageContainer src='https://imgur.com/BDXrHqK.png' alt='Heroku'></ImageContainer>
             <ImageContainer src='https://imgur.com/aMntOxk.png' alt='Firestore'></ImageContainer>
-            <ImageContainer src='https://imgur.com/ipSPgKq.png' alt='Auth0'></ImageContainer>
           </TextContainer>
           <TextContainer>
+            <ImageContainer src='https://imgur.com/ipSPgKq.png' alt='Auth0'></ImageContainer>
             <ImageContainer src='https://imgur.com/6GiWa2Y.png' alt='PostGreSQL'></ImageContainer>
           </TextContainer>
         </LogoContainerRight>
