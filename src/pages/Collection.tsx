@@ -13,6 +13,10 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   z-index: 5;
+
+  @media (max-width: 480px) {
+    justify-content: center;
+  }
 `;
 
 function CollectionPage() {

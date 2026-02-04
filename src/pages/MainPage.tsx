@@ -27,6 +27,11 @@ const LogoContainerLeft = styled.div`
   flex-direction: column;
   align-items: center;
   margin-left: 10vw;
+
+  @media (max-width: 480px) {
+    margin-left: 0;
+    align-self: center;
+  }
 `;
 const LogoContainerRight = styled.div`
   display: flex;
@@ -34,6 +39,11 @@ const LogoContainerRight = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: 10vw;
+
+  @media (max-width: 480px) {
+    margin-right: 0;
+    align-self: center;
+  }
 `;
 
 const TextContainer = styled.div`

@@ -16,22 +16,26 @@ const Container = styled.div`
   z-index: 51;
 `
 const TextContainer = styled.div`
-  position: relative;
-  width: 40vw;
-  min-width: 320px;
-  height: 80vh;
-  min-height: 420px;
+  width: 800px;
+  height: 800px;
+  min-width: 500px;
+  min-height: 500px;
   background-color: rgba(255,255,255,0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 10px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @media (max-width: 480px) {
+    min-width: 400px;
+    min-height: 420px;
+  }
 `
 
 const Title = styled.p`
-  margin-top: 2vw;
+  margin-top: 40px;
   font-size: clamp(30px, 2vw, 50px);;
   font-weight: bold;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -52,35 +56,41 @@ const NormalText = styled.p`
 `
 
 const ImageContainer = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  flex-shrink: 0;
+
+  @media (max-width: 480px) {
     width: 400px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flext-start;
-    overflow-x: auto;
-    flex-shrink: 0;
+    height: 400px;
+  }
 `
 
 const Image = styled.img`
-    padding: 2vw;
-    width: 300px;
-    height: auto;
-    object-fit: cover;
+  width: 500px;
+  height: auto;
+  object-fit: cover;
+
+  @media (max-width: 480px) {
+    width: 400px;
+    height: 400px;
+  }
 `
 
 const ExitButton = styled.button`
-  position: absolute;
-  right: 0;
+  align-self: flex-end;
+  position: fixed;
+  margin: 2px;
   background-color: #7b0000;
   color: white;
-  border: solid 1px black;
-  border-radius: 30px;
-  width: 8vw;
-  max-width: 60px;
-  height: 8vh;
-  max-height: 60px;
+  border: solid 3px black;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   font-size: large;
-  font-weight: bold;
   &:hover {
     background-color: #ff0000;
   }
@@ -103,11 +113,8 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
     if (!show) return null;
     return (      
         <Container>
-              <TextContainer>
-              {(prop.title === "Loading") && <Loading></Loading>}
-              <ExitButton onClick={onExit}>X</ExitButton>
-              {(prop.title != "Loading") && 
-                <>
+              <TextContainer>              
+                  <ExitButton onClick={onExit}>X</ExitButton>
                   <Title> {prop.title}</Title>
                   <ImageContainer>
                     {prop.img_urls.map(image => (
@@ -120,8 +127,6 @@ function ProjectCard({ prop, show, onExit}: ProjectProp) {
                   <NormalText>{prop.summary}</NormalText>
                   <Header> Description </Header>
                   <NormalText>{prop.description}</NormalText>
-                </>
-              }
               </TextContainer>    
         </Container>
     );

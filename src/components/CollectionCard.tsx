@@ -12,14 +12,15 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  margin-left: 20px;
+  margin: 10px;
   border: solid 3px white;
-  overflow: hidden;
   cursor: pointer;
+  border: solid 1px black;
+  border-radius: 10px;
 
-  @media (max-width: 600px) {
-    width: 150px;
-    height: 200px;
+  @media (max-width: 480px) {
+    width: 170px;
+    height: 220px;
   }
 `
 
@@ -35,11 +36,11 @@ const Title = styled.p`
 `
   
 const Image = styled.img`
-  width: 295px;
+  width: 300px;
   height: auto;
   
   @media (max-width: 600px) {
-    width: 150px;
+    width: 170px;
     height: auto;
   }
 `
